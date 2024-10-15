@@ -1,36 +1,36 @@
 import { httpService } from '../http.service'
 
-export const itemService = {
+export const commentService = {
     query,
     getById,
     save,
     remove,
-    addItemMsg
+    addCommentMsg
 }
 
 async function query(filterBy = { txt: '', price: 0 }) {
-    return httpService.get(`item`, filterBy)  // שונה מ-'car' ל-'item'
+    return httpService.get(`comment`, filterBy)  // שונה מ-'car' ל-'comment'
 }
 
-function getById(itemId) {
-    return httpService.get(`item/${itemId}`)  // שונה מ-'carId' ל-'itemId'
+function getById(commentId) {
+    return httpService.get(`comment/${commentId}`)  // שונה מ-'carId' ל-'commentId'
 }
 
-async function remove(itemId) {
-    return httpService.delete(`item/${itemId}`)  // שונה מ-'carId' ל-'itemId'
+async function remove(commentId) {
+    return httpService.delete(`comment/${commentId}`)  
 }
 
-async function save(item) {
-    var savedItem
-    if (item._id) {
-        savedItem = await httpService.put(`item/${item._id}`, item)  // שונה מ-'car' ל-'item'
+async function save(comment) {
+    var savedComment
+    if (comment._id) {
+        savedComment = await httpService.put(`comment/${comment._id}`, comment)  // שונה מ-'car' ל-'comment'
     } else {
-        savedItem = await httpService.post('item', item)  // שונה מ-'car' ל-'item'
+        savedComment = await httpService.post('comment', comment)  // שונה מ-'car' ל-'comment'
     }
-    return savedItem
+    return savedComment
 }
 
-async function addItemMsg(itemId, txt) {
-    const savedMsg = await httpService.post(`item/${itemId}/msg`, {txt})  // שונה מ-'carId' ל-'itemId'
+async function addCommentMsg(commentId, txt) {
+    const savedMsg = await httpService.post(`comment/${commentId}/msg`, {txt})  // שונה מ-'carId' ל-'commentId'
     return savedMsg
 }

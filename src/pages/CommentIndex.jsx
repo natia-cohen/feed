@@ -1,68 +1,72 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { loadItems, addItem, updateItem, removeItem, addItemMsg } from '../store/actions/item.actions'
+import { loadComments, addComment, updateComment, removeComment, addCommentMsg } from '../store/actions/comment.actions'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { itemService } from '../services/item'
+import { commentService } from '../services/comment'
 import { userService } from '../services/user'
 
-import { ItemList } from '../cmps/ItemList'
-import { ItemFilter } from '../cmps/ItemFilter'
+import { CommentList } from '../cmps/CommentList'
+import { CommentFilter } from '../cmps/CommentFilter'
+import { CommentForm } from '../cmps/CommentForm'
 
-export function ItemIndex() {
+export function CommentIndex() {
 
-    const [ filterBy, setFilterBy ] = useState(itemService.getDefaultFilter())
-    const items = useSelector(storeState => storeState.itemModule.items)
+    const [ filterBy, setFilterBy ] = useState(commentService.getDefaultFilter())
+    const comments = useSelector(storeState => storeState.commentModule.comments)
 
     useEffect(() => {
-        loadItems(filterBy)
+        loadComments(filterBy)
     }, [filterBy])
+  
 
-    async function onRemoveItem(itemId) {
+
+    async function onRemoveComment(commentId) {
         try {
-            await removeItem(itemId)
-            showSuccessMsg('Item removed')            
+            await removeComment(commentId)
+            showSuccessMsg('Comment removed')            
         } catch (err) {
-            showErrorMsg('Cannot remove item')
+            showErrorMsg('Cannot remove Comment')
         }
     }
 
-    async function onAddItem() {
-        const item = itemService.getEmptyItem()
-        item.name = prompt('Item name?')
+    async function onAddComment() {
+        const comment = commentService.getEmptyComment()
+        comment.name = prompt('Comment name?')
         try {
-            const savedItem = await addItem(item)
-            showSuccessMsg(`Item added (id: ${savedItem._id})`)
+            const savedComment = await addComment(comment)
+            showSuccessMsg(`Comment added (id: ${savedComment._id})`)
         } catch (err) {
-            showErrorMsg('Cannot add item')
+            showErrorMsg('Cannot add comment')
         }        
     }
 
-    async function onUpdateItem(item) {
-        const speed = +prompt('New speed?', item.speed)
-        if(speed === 0 || speed === item.speed) return
+    async function onUpdateComment(comment) {
+        const speed = +prompt('New speed?', comment.speed)
+        if(speed === 0 || speed === comment.speed) return
 
-        const itemToSave = { ...item, speed }
+        const commentToSave = { ...comment, speed }
         try {
-            const savedItem = await updateItem(itemToSave)
-            showSuccessMsg(`Item updated, new speed: ${savedItem.speed}`)
+            const savedComment = await updateComment(commentToSave)
+            showSuccessMsg(`Comment updated, new speed: ${savedComment.speed}`)
         } catch (err) {
-            showErrorMsg('Cannot update item')
+            showErrorMsg('Cannot update comment')
         }        
     }
 
     return (
-        <main className="item-index">
+        <main className="comment-index">
             <header>
-                <h2>Items</h2>
-                {userService.getLoggedinUser() && <button onClick={onAddItem}>Add an Item</button>}
+                <h2>Comments</h2>
+                {userService.getLoggedinUser() && <button onClick={onAddComment}>Add an Comment</button>}
             </header>
-            <ItemFilter filterBy={filterBy} setFilterBy={setFilterBy} />
-            <ItemList 
-                items={items}
-                onRemoveItem={onRemoveItem} 
-                onUpdateItem={onUpdateItem}/>
+            <CommentFilter filterBy={filterBy} setFilterBy={setFilterBy} />
+            <CommentForm />
+            <CommentList 
+                comments={comments}
+                onRemoveComment={onRemoveComment} 
+                onUpdateComment={onUpdateComment}/>
         </main>
     )
 }

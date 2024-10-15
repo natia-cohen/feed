@@ -8,7 +8,7 @@ import { ReviewIndex } from './pages/ReviewIndex.jsx'
 import { ChatApp } from './pages/Chat.jsx'
 import { AdminIndex } from './pages/AdminIndex.jsx'
 
-import { CommentIndex } from './pages/CommentIndex'  // היה CarDetails, עכשיו CommentIndex
+
 import { UserDetails } from './pages/UserDetails'
 
 import { AppHeader } from './cmps/AppHeader'
@@ -28,8 +28,8 @@ export function RootCmp() {
                 { path: 'vision', element: <AboutVision /> }
             ]
         },
-        { path: 'comment', element: <CommentIndex /> },  // היה car, עכשיו comment
-        { path: 'comment/:commentId', element: <CommentIndex /> },  // היה carId, עכשיו commentId
+        { path: 'comment', element: <CommentIndex /> },  
+        { path: 'comment/:commentId', element: <CommentIndex /> }, 
         { path: 'user/:id', element: <UserDetails /> },
         { path: 'review', element: <ReviewIndex /> },
         { path: 'chat', element: <ChatApp /> },

@@ -1,31 +1,62 @@
-const { DEV, VITE_LOCAL } = import.meta.env
+const { DEV, VITE_LOCAL } = import.meta.env;
 
-import { getRandomIntInclusive, makeId } from '../util.service'
+import { getRandomIntInclusive, makeId } from '../util.service';
 
-import { itemService as local } from './item.service.local'
-import { itemService as remote } from './item.service.remote'
+import { commentService as local } from './comment.service.local';
+import { commentService as remote } from './comment.service.remote';
 
-function getEmptyItem() {
+function getEmptyComment() {
 	return {
-		name: makeId(),  // שונה מ-vendor ל-name כדי לשקף פריט גנרי יותר
-		speed: getRandomIntInclusive(80, 240),
-		msgs: [],
-	}
+		_id: makeId(),
+        email: getRandomIntInclusive(1, 10),
+		message: getRandomIntInclusive(80, 240),
+	};
 }
 
 function getDefaultFilter() {
     return {
-        txt: '',
-        minSpeed: '',
+        email: '',
+        message: '',
         sortField: '',
         sortDir: '',
-    }
+    };
 }
 
-const service = VITE_LOCAL === 'true' ? local : remote
-export const itemService = { getEmptyItem, getDefaultFilter, ...service }
+const service = VITE_LOCAL === 'true' ? local : remote;
+export const commentService = { getEmptyComment, getDefaultFilter, ...service };
 
 // Easy access to this service from the dev tools console
-// when using script - dev / dev:local
+if (DEV) window.commentService = commentService;
 
-if (DEV) window.itemService = itemService  // שונה מ-carService ל-itemService
+
+// const { DEV, VITE_LOCAL } = import.meta.env
+
+// import { getRandomIntInclusive, makeId } from '../util.service'
+
+// import { commentService as local } from './comment.service.local'
+// import { commentService as remote } from './comment.service.remote'
+
+// function getEmptycomment() {
+// 	return {
+// 		email: makeId(), 
+// 		message: getRandomIntInclusive(80, 240),
+
+// 	}
+// }
+
+// function getDefaultFilter() {
+//     return {
+//         email: '',
+//         message: '',
+//         sortField: '',
+//         sortDir: '',
+//     }
+// }
+
+// const service = VITE_LOCAL === 'true' ? local : remote
+// export const commentService = { getEmptycomment, getDefaultFilter, ...service }
+
+// // Easy access to this service from the dev tools console
+// // when using script - dev / dev:local
+
+// if (DEV) window.commentService = commentService  // שונה מ-carService ל-commentService

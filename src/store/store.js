@@ -1,12 +1,12 @@
 import { legacy_createStore as createStore, combineReducers } from 'redux'
 
-import { itemReducer } from './reducers/item.reducer'  // שינוי מ-carReducer ל-itemReducer
+import { commentReducer } from './reducers/comment.reducer' 
 import { userReducer } from './reducers/user.reducer'
 import { reviewReducer } from './reducers/review.reducer'
 import { systemReducer } from './reducers/system.reducer'
 
 const rootReducer = combineReducers({
-    itemModule: itemReducer,  // שינוי מ-carModule ל-itemModule
+    commentModule: commentReducer, 
     userModule: userReducer,
     systemModule: systemReducer,
     reviewModule: reviewReducer,

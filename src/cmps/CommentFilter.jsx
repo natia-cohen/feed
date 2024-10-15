@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export function ItemFilter({ filterBy, setFilterBy }) {
+export function CommentFilter({ filterBy, setFilterBy }) {
     const [ filterToEdit, setFilterToEdit ] = useState(structuredClone(filterBy))
 
     useEffect(() => {
