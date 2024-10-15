@@ -65,6 +65,7 @@ async function save(comment) {
 }
 
 
+
 async function addcommentMsg(commentId, txt) {
     const comment = await getById(commentId)  
 
@@ -153,5 +154,6 @@ const demoData = [
   ];
   
 
-
-localStorage.setItem(STORAGE_KEY, JSON.stringify(demoData));
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(demoData));
+  }

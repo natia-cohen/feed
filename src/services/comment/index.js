@@ -7,10 +7,9 @@ import { commentService as remote } from './comment.service.remote';
 
 function getEmptyComment() {
 	return {
-		_id: makeId(),
-        email: getRandomIntInclusive(1, 10),
-		message: getRandomIntInclusive(80, 240),
-	};
+        email:'',
+		message: '',
+	}
 }
 
 function getDefaultFilter() {

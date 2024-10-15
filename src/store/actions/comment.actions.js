@@ -35,7 +35,9 @@ export async function removeComment(commentId) {
 
 export async function addComment(comment) {
     try {
+        console.log(comment)
         const savedComment = await commentService.save(comment)
+        console.log(savedComment)
         store.dispatch(getCmdAddComment(savedComment))
         return savedComment
     } catch (err) {

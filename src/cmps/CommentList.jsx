@@ -1,7 +1,7 @@
 import { userService } from '../services/user'
 import { CommentPreview } from './CommentPreview'  // שונה מ-CarPreview ל-CommentPreview
 
-export function CommentList({ comments, onRemoveComment, onUpdateComment }) {
+export function CommentList({ comments, onRemoveComment }) {
     console.log(comments)
     
     function shouldShowActionBtns(comment) {
@@ -20,7 +20,7 @@ export function CommentList({ comments, onRemoveComment, onUpdateComment }) {
                         <CommentPreview comment={comment}/> 
                         {shouldShowActionBtns(comment) && (
                             <div className="actions">
-                                <button onClick={() => onUpdateComment(comment)}>Edit</button>
+                                {/* <button onClick={() => onUpdateComment(comment)}>Edit</button> */}
                                 <button onClick={() => onRemoveComment(comment._id)}>x</button>
                             </div>
                         )}

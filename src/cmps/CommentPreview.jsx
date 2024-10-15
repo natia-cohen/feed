@@ -7,7 +7,7 @@ export function CommentPreview({ comment }) {
     <article className="preview">
       <header>
         <Link to={`/comment/${comment._id}`}>{comment.email}</Link>{" "}
-        {/* שונה מ-car.vendor ל-comment.name */}
+
       </header>
 
       <p>
